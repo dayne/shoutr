@@ -11,7 +11,6 @@ I. Prerequisites:
 - an icecast server to point at
 - libshout (2.2.2)
 - ruby-shout # gem install ruby-shout
-  this won't actually work until ruby-shout gem is updated
 - mpg123
   reads mp3 files to spit into oggenc
 - vorbis-tools
