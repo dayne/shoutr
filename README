@@ -3,11 +3,12 @@ About:
 I wanted something that would provide an easy CLI interface to feeding an
 icecast2 server.  Icecast2 only takes oggs as input.  
 
-shoutr 
+enter shoutr 
 
 I. Prerequisites:
 =================
 
+- an icecast server to point at
 - libshout (2.2.2)
 - ruby-shout # gem install ruby-shout
   this won't actually work until ruby-shout gem is updated
@@ -19,6 +20,7 @@ I. Prerequisites:
 II. Setup:
 ==========
 
+magic fairy dust sprinkled everywhere
 
 III. Usage:
 ===========
