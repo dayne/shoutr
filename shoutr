@@ -3,6 +3,8 @@
 # Stream all the files given on the commandline to the Icecast server on
 # localhost. 
 
+# originally started from example 'shoutit.rb' from ruby-shout gem
+
 require 'rubygems'
 require 'shout'
 require 'yaml'
