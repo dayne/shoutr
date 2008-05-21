@@ -1,0 +1,31 @@
+About:
+======
+I wanted something that would provide an easy CLI interface to feeding an
+icecast2 server.  Icecast2 only takes oggs as input.  
+
+shoutr 
+
+I. Prerequisites:
+=================
+
+- libshout (2.2.2)
+- ruby-shout # gem install ruby-shout
+  this won't actually work until ruby-shout gem is updated
+- mpg123
+  reads mp3 files to spit into oggenc
+- vorbis-tools
+  provides oggenc 
+
+II. Setup:
+==========
+
+
+III. Usage:
+===========
+
+Just throw a pile of music files in the command line and it will stream
+them to your configured location.  Using mpg123 and oggenc it will convert
+mp3 files on the fly to ogg.
+
+$ shoutr /path/to/some/music/files/*
+
