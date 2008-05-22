@@ -8,19 +8,27 @@ enter shoutr
 I. Prerequisites:
 =================
 
-- an icecast server to point at
-- libshout (2.2.2)
-- ruby-shout # gem install ruby-shout
-- mpg123
-  reads mp3 files to spit into oggenc
-- vorbis-tools
-  provides oggenc 
+- An Icecast2 server to point at (not included in shoutr)
+- libshout-2.x 
+  centos/fedora: yum install libshout libshout-devel
+- ruby-shout   # gem install ruby-shout
+- mpg123 # reads mp3 the files for piping to oggenc
+  centos/fedora: yum install mpg123
+- vorbis-tools # provides oggenc
+  centos/fedora: yum install vorbis-tools
 
 II. Setup:
 ==========
 
 magic fairy dust sprinkled everywhere
 
+  $ git clone git://github.com/dayne/shoutr.git
+  $ cd shoutr
+  $ cp config.yml.example config.yml  # edit it and point at icecast server
+  $ cd <location of your personal bin directory in your path>
+    # I like  $HOME/usr/bin and have: export PATH=$PATH:$HOME/usr/bin
+  $ ln -s <location of shoutr> .
+  
 III. Usage:
 ===========
 
@@ -29,4 +37,10 @@ them to your configured location.  Using mpg123 and oggenc it will convert
 mp3 files on the fly to ogg.
 
 $ shoutr /path/to/some/music/files/*
+
+Run it in daemon mode for much more fun.  Allows you to shoutr various files 
+and have them inserted into the damon's queue.
+
+$ shoutr -d 
+
 

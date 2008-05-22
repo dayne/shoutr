@@ -11,7 +11,7 @@ require 'yaml'
 
 BLOCKSIZE = 16384
 
-c = YAML.load_file('config.yml')
+c = YAML.load_file(File.join(File.dirname(File.readlink(__FILE__)),'config.yml'))
 s = Shout.new
 s.host     = c[:host]  || "localhost" # beef.gina.alaska.edu
 s.port     = c[:port]  || "8000"      # 8008
