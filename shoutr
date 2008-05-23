@@ -38,7 +38,7 @@ ARGV.each do |filename|
   next unless target
   if File.extname(target).downcase == '.mp3'
     puts "got an mp3 file, trying new code"
-    cmd = ("mpg123 -q -w - '#{target}' | oggenc -c '#{target}' -Q -")
+    cmd = ("mpg123 -q -w - \"#{target}\" | oggenc -c \"#{target}\" -Q -")
     IO.popen(cmd,'r') { |p| send_io(s,p,filename) } 
   elsif File.extname(target).downcase == '.ogg'
     puts "got an ogg file, using old code" 
