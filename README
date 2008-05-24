@@ -16,6 +16,9 @@ I. Prerequisites:
   centos/fedora: yum install mpg123
 - vorbis-tools # provides oggenc
   centos/fedora: yum install vorbis-tools
+- id3lib
+  centos/fedora: yum install id3lib
+- id3lib-ruby  # gem install id3lib-ruby
 
 II. Setup:
 ==========

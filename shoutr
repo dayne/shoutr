@@ -1,23 +1,30 @@
 #!/usr/bin/ruby
-
 # Stream all the files given on the commandline to the Icecast server on
 # localhost. 
 
 # originally started from example 'shoutit.rb' from ruby-shout gem
 
+$: << File.join( File.dirname( File.readlink(__FILE__) ), './lib' )
 require 'rubygems'
 require 'shout'
 require 'yaml'
+require 'id3lib'
 
 BLOCKSIZE = 16384
 
 c = YAML.load_file(File.join(File.dirname(File.readlink(__FILE__)),'config.yml'))
 s = Shout.new
-s.host     = c[:host]  || "localhost" # beef.gina.alaska.edu
-s.port     = c[:port]  || "8000"      # 8008
-s.mount    = c[:mount] || "/shoutr"   #
-s.user     = c[:user]  || "source"    # 
-s.password = c[:password] || "hackme" # 
+s.host     = c[:host]   || "localhost" # beef.gina.alaska.edu
+s.port     = c[:port]   || "8000"      # 8008
+s.mount    = c[:mount]  || "/shoutr"   #
+s.user     = c[:user]   || "source"    # 
+s.password = c[:password] || "hackme"  # 
+s.description = c[:description] || "" 
+s.public   = c[:public] || false
+s.url      = c[:url]    || "http://github.com/dayne/shoutr"
+s.genre    = c[:genre]  || ""
+s.name     = c[:name]   || ""
+
 
 s.connect
 
@@ -38,7 +45,10 @@ ARGV.each do |filename|
   next unless target
   if File.extname(target).downcase == '.mp3'
     puts "got an mp3 file, trying new code"
-    cmd = ("mpg123 -q -w - \"#{target}\" | oggenc -c \"#{target}\" -Q -")
+    tag = ID3Lib::Tag.new(target)
+    cmd = "mpg123 -q -w - \"#{target}\" " + 
+          " | oggenc -a \"#{tag.artist}\" -t \"#{tag.title}\" " +
+          " -c \"#{target}\" -Q -"
     IO.popen(cmd,'r') { |p| send_io(s,p,filename) } 
   elsif File.extname(target).downcase == '.ogg'
     puts "got an ogg file, using old code" 
