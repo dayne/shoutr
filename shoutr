@@ -46,8 +46,9 @@ ARGV.each do |filename|
   if File.extname(target).downcase == '.mp3'
     puts "got an mp3 file, trying new code"
     tag = ID3Lib::Tag.new(target)
+    title = tag.title || File.basename(filename,'.*')
     cmd = "mpg123 -q -w - \"#{target}\" " + 
-          " | oggenc -a \"#{tag.artist}\" -t \"#{tag.title}\" " +
+          " | oggenc -a \"#{tag.artist}\" -t \"#{title}\" " +
           " -c \"#{target}\" -Q -"
     IO.popen(cmd,'r') { |p| send_io(s,p,filename) } 
   elsif File.extname(target).downcase == '.ogg'
